@@ -27,16 +27,6 @@ function App() {
 
 
   //add new todo item to database
-  const addItem = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post('http://localhost:8080/api-v1/addTasks', { item: itemText })
-      setListItems(prev => [...prev, res.data]);
-      setItemText('');
-    } catch (err) {
-      console.log(err);
-    }
-  }
   const addTsks = async () => {
 
     if(tskName.length === 0) {
@@ -51,7 +41,7 @@ function App() {
       deadlineDate: tskDueDate
     }
     try {
-      const res = await axios.post('http://localhost:8080/api-v1/addTasks', tskObj)
+      const res = await axios.post('https://sample-todoapp.onrender.com/api-v1/addTasks', tskObj)
 
       if(res.data) {
         setListItems(prev => [...prev, res.data.data.data]);
@@ -91,8 +81,7 @@ function App() {
 
 
   const submitEditTsks = async () => {
-
-    
+ 
     if(tskName.length === 0) {
       toast.error("Task name is Required");
       return
@@ -106,7 +95,7 @@ function App() {
       status: tskStatus
     }
     try {
-      const res = await axios.put('http://localhost:8080/api-v1/updateTasks', tskObj)
+      const res = await axios.put('https://sample-todoapp.onrender.com/api-v1/updateTasks', tskObj)
       setListItems(prev => [...prev, res.data.data.data]);
 
       if(res.data.data != null) {
@@ -146,7 +135,7 @@ function App() {
 
   const getItemsList = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/api-v1/fetchTasks');
+      const res = await axios.get('https://sample-todoapp.onrender.com/api-v1/fetchTasks');
 
 
       if (res.data.data) {
@@ -184,7 +173,7 @@ function App() {
     }
 
     try {
-      const res = await axios.put(`http://localhost:8080/api-v1/updateTasks`, tskObj)
+      const res = await axios.put(`https://sample-todoapp.onrender.com/api-v1/updateTasks`, tskObj)
       // console.log(res.data)
       console.log("Item deleted display toast");
       toast.success("Task Deleted!");
